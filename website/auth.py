@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from .models import User
-from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 
@@ -23,7 +22,7 @@ def login():
 
         user = User.query.filter_by(email = email).first()
         if user:
-            if check_password_hash(user.password, password):
+            if user.password == password:
                 flash('Logged in successfully!', category = 'success')
                 login_user(user, remember = True)
                 return redirect(url_for("views.home"))
@@ -55,8 +54,7 @@ def sign_up():
         else:
             # Add user to the database
             new_user = User(email=email,
-            password=generate_password_hash(password1, 
-            method = 'scrypt'),
+            password=password1,
                 firstname=firstname
 )
             db.session.add(new_user)
