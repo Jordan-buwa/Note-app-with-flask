@@ -1,29 +1,8 @@
-numpy
-flask
-flask_login
 sqlalchemy
-werkzeug
-flask_sqlalchemy
-
-{% extends "base.html" %} {% block title %} Homepage {% endblock %}
-
-{% block content %}
-<h1 align="center">Notes</h1>
-<ul class="list-group list-group-flush" id="notes">
-  {% for note in user.notes %}
-  <li class="list-group-item">
-    {{ note.data }}
-    <button type="button" class="close" onClick="deleteNote({{ note.id }})">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </li>
-  {% endfor %}
-</ul>
-<form method="POST">
-  <textarea name="note" id="note" class="form-control"></textarea>
-  <br />
-  <div align="center">
-    <button type="submit" class="btn btn-primary">Add Note</button>
-  </div>
-</form>
-{% endblock %}
+Flask==2.3.3
+Flask-SQLAlchemy==3.0.5
+Flask-Login==0.6.3
+gunicorn==22.0.0
+psycopg2-binary==2.9.7
+Werkzeug==2.3.7
+python-dotenv==1.0.1

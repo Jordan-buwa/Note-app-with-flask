@@ -2,3 +2,4 @@
 website/__pycache__/
 .myapp/
 instance/
+*.pyc
