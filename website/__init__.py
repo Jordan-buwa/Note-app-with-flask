@@ -9,11 +9,12 @@ load_dotenv()
 
 db = SQLAlchemy()
 migrate = Migrate()
+DB_NAME = "database.db"
 
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'fallback-secret-key')
-    database_url = os.environ.get('DATABASE_URL', 'sqlite:///instance/database.db')
+    database_url = os.environ.get('DATABASE_URL', f'sqlite:///{DB_NAME}')
     if database_url.startswith('postgres://'):
         database_url = database_url.replace('postgres://', 'postgresql://')
     app.config['SQLALCHEMY_DATABASE_URI'] = database_url
@@ -22,7 +23,7 @@ def create_app():
     login_manager = LoginManager()
     login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
-    
+
     db.init_app(app)
     migrate.init_app(app, db)
 
