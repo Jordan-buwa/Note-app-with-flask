@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}My Notes{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h1>{{ user.firstname }}'s Notes</h1>
+    {% if notes %}
+        {% for note in notes %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <p class="card-text">{{ note.data }}</p>
+                    <p class="card-text"><small class="text-muted">{{ note.date.strftime('%Y-%m-%d %H:%M:%S') }}</small></p>
+                    <button onclick="deleteNode({{ note.id }})" class="btn btn-danger btn-sm">Delete</button>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-muted">No notes yet. Add a note on the homepage!</p>
+    {% endif %}
+    <a href="{{ url_for('views.home') }}" class="btn btn-secondary">Back to Home</a>
+</div>
+{% endblock %}

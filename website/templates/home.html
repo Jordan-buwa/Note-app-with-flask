@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<div class="container mt-4">
+    <h1>Welcome, {{ user.firstname }}!</h1>
+    <div class="mb-3">
+        <h3>Add a Note</h3>
+        <form method="POST" action="{{ url_for('views.home') }}">
+            <div class="form-group">
+                <textarea name="note" id="note" class="form-control" placeholder="Write what you have in mind..." rows="4"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Note</button>
+        </form>
+    </div>
+    <a href="{{ url_for('views.notes') }}" class="btn btn-secondary">View All Notes</a>
+</div>
+{% endblock %}
